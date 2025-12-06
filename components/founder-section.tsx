@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Linkedin, Twitter, Mail } from "lucide-react"
+import Image from "next/image"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -63,20 +64,20 @@ export function FounderSection() {
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Image */}
           <div ref={imageRef} className="relative">
-            <div className="relative aspect-4/5 rounded-3xl overflow-hidden bg-linear-to-br from-[#ea0d7c]/20 via-[#0a0a0f] to-[#0a0a0f] border border-white/6">
-              {/* Decorative elements */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-48 h-48 md:w-72 md:h-72 rounded-full bg-linear-to-br from-[#ea0d7c]/30 to-transparent blur-3xl" />
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-linear-to-br from-[#ea0d7c]/20 via-[#0a0a0f] to-[#0a0a0f] border border-white/6">
+              {/* Profile Image */}
+              <div className="absolute inset-0">
+                <Image 
+                  src="/images/profile_image.png" 
+                  alt="Zainab Hamid - Founder" 
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
 
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-linear-to-br from-[#ea0d7c] to-[#ea0d7c]/60 mx-auto mb-6 flex items-center justify-center text-white text-4xl md:text-5xl font-bold shadow-[0_0_60px_rgba(234,13,124,0.4)]">
-                    ZH
-                  </div>
-                  <p className="text-white/40 text-sm">Zainab Hamid</p>
-                </div>
-              </div>
+              {/* Decorative gradient overlay */}
+              <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
 
               {/* Grid pattern overlay */}
               <div
@@ -105,17 +106,17 @@ export function FounderSection() {
 
             <div className="space-y-4 text-gray-400 text-lg leading-relaxed mb-8">
               <p>
-                "I started Ctrl. Alt. Delta because I saw too many brilliant business ideas 
+                "I started Ctrl.Alt.Delta because I saw too many brilliant business ideas{" "}
                 <span className="text-white font-medium">fail due to poor technical execution</span>. 
                 Traditional agencies are too slow; freelancers are unreliable."
               </p>
               <p>
-                "My background in 
-                <span className="text-[#ea0d7c] font-medium">Deep Learning and Full-Stack Development</span> 
+                "My background in{" "}
+                <span className="text-[#ea0d7c] font-medium">Deep Learning and Full-Stack Development</span>{" "}
                 allows me to bridge the gap between academic-grade AI and real-world business ROI."
               </p>
               <p>
-                "We don't just write code; 
+                "We don't just write code;{" "}
                 <span className="text-white font-medium">we build assets</span>."
               </p>
             </div>
