@@ -66,7 +66,7 @@ export function DeltaBotSection() {
             <p className="text-[#ea0d7c] text-sm font-semibold uppercase tracking-widest mb-4">
               Live Demo
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+            <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
               We Don't Just Sell AI.{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">
                 We Run On It.

@@ -81,7 +81,7 @@ export function DeltaBotWidget() {
 
   return (
     <>
-      {/* Toast Notification */}
+      {/* Toast Notification - HUD Style */}
       <div 
         className={`fixed bottom-28 sm:bottom-28 right-4 sm:right-6 z-50 max-w-[280px] sm:max-w-sm transition-all duration-500 ${
           toastVisible 
@@ -90,67 +90,46 @@ export function DeltaBotWidget() {
         }`}
       >
         <div 
-          className="relative bg-[#0a0a0f]/95 backdrop-blur-xl rounded-2xl p-4 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
-          style={{ 
-            borderWidth: '2px',
-            borderStyle: 'solid',
-            borderColor: currentToast?.color || '#ea0d7c',
-            boxShadow: `0 0 30px ${currentToast?.color}40, 0 0 60px ${currentToast?.color}20`
-          }}
+          className="relative bg-black/90 backdrop-blur-xl border rounded-lg p-4 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+          style={{ borderColor: `${currentToast?.color}40` }}
         >
-          {/* Glow effect */}
-          <div 
-            className="absolute -inset-px rounded-2xl blur-sm opacity-50"
-            style={{ background: `linear-gradient(to right, ${currentToast?.color}40, transparent)` }}
-          />
-          
-          <div className="relative">
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 rounded-tl" style={{ borderColor: currentToast?.color }} />
+            <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 rounded-tr" style={{ borderColor: currentToast?.color }} />
+            <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 rounded-bl" style={{ borderColor: currentToast?.color }} />
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 rounded-br" style={{ borderColor: currentToast?.color }} />
+
             {/* Header */}
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center"
-                  style={{ background: `linear-gradient(135deg, ${currentToast?.color}, ${currentToast?.color}80)` }}
-                >
-                  <Bot className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold">Delta-1</p>
-                  <div className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-green-500 text-[10px]">Online</span>
-                  </div>
-                </div>
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: currentToast?.color }} />
+                <span className="text-[10px] font-mono tracking-wider" style={{ color: currentToast?.color }}>DELTA-1 NOTIFICATION</span>
               </div>
               <button 
                 onClick={dismissToast}
                 className="text-gray-500 hover:text-white transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3 h-3" />
               </button>
             </div>
             
             {/* Message */}
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed mb-3">
               {currentToast?.message}
             </p>
             
             {/* Quick action */}
             <button 
               onClick={handleClick}
-              className="mt-3 w-full py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full py-2 bg-white/5 hover:bg-white/10 border rounded text-[10px] sm:text-xs font-mono transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wider"
               style={{ 
-                backgroundColor: `${currentToast?.color}20`,
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                borderColor: `${currentToast?.color}50`,
+                borderColor: `${currentToast?.color}40`,
                 color: currentToast?.color
               }}
             >
-              <MessageCircle className="w-4 h-4" />
-              Talk to me
+              <MessageCircle className="w-3 h-3" />
+              Initialize Chat Protocol
             </button>
-          </div>
         </div>
       </div>
 

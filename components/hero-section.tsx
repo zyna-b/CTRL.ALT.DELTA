@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Shield, Clock, Gem, Headphones } from "lucide-react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -11,10 +11,18 @@ gsap.registerPlugin(ScrollTrigger)
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const robotRef = useRef<HTMLDivElement>(null)
-  const leftContentRef = useRef<HTMLDivElement>(null)
-  const rightStatsRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const moonRef = useRef<HTMLDivElement>(null)
+  const hudRef = useRef<HTMLDivElement>(null)
+  const trustBarRef = useRef<HTMLDivElement>(null)
+
+  const [hudMetrics, setHudMetrics] = useState({
+    systemStatus: "ONLINE",
+    ipProtocol: "SECURE",
+    assetValuation: "TRACKING",
+    uptime: "99.97%",
+  })
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -34,16 +42,8 @@ export function HeroSection() {
         ease: "power3.out",
       })
 
-      gsap.from(leftContentRef.current, {
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        delay: 0.5,
-        ease: "power3.out",
-      })
-
-      gsap.from(rightStatsRef.current, {
-        x: 100,
+      gsap.from(contentRef.current, {
+        y: 50,
         opacity: 0,
         duration: 1,
         delay: 0.5,
@@ -57,133 +57,198 @@ export function HeroSection() {
         delay: 0.2,
         ease: "power4.out",
       })
+
+      gsap.from(hudRef.current, {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.8,
+        ease: "power3.out",
+      })
+
+      gsap.from(trustBarRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        delay: 1,
+        ease: "power3.out",
+      })
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
+  // Simulated HUD flicker effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHudMetrics(prev => ({
+        ...prev,
+        uptime: `${(99.9 + Math.random() * 0.09).toFixed(2)}%`,
+      }))
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-linear-to-b from-[#0a0a0f] via-[#0f0a15] to-[#0a0a0f]" />
+      {/* Deep dark background with subtle gradient */}
+      <div className="absolute inset-0 bg-linear-to-b from-[#050508] via-[#0a0a10] to-[#050508]" />
 
-      {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-20">
+      {/* Animated cyber grid background */}
+      <div className="absolute inset-0 opacity-30">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(192, 38, 211, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(192, 38, 211, 0.1) 1px, transparent 1px)
+              linear-gradient(rgba(255, 0, 127, 0.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 0, 127, 0.08) 1px, transparent 1px)
             `,
-            backgroundSize: "60px 60px",
+            backgroundSize: "80px 80px",
           }}
         />
       </div>
 
-      {/* Background text */}
-      <h1
+      {/* Scan lines overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.1) 2px,
+            rgba(255, 255, 255, 0.1) 4px
+          )`,
+        }}
+      />
+
+      {/* Background text - watermark style */}
+      {/* <h1
         ref={titleRef}
-        className="absolute top-[15%] sm:top-1/4 left-0 right-0 flex justify-center pointer-events-none select-none px-4"
+        className="absolute top-[12%] sm:top-[18%] left-0 right-0 flex justify-center pointer-events-none select-none px-4"
       >
-        <span className="text-[10vw] sm:text-[8vw] md:text-[6vw] font-black text-transparent bg-clip-text bg-linear-to-b from-white/[0.07] to-transparent tracking-tight whitespace-nowrap">
+        <span className="text-[12vw] sm:text-[10vw] md:text-[8vw] font-black text-transparent bg-clip-text bg-gradient-to-b from-white/[0.04] to-transparent tracking-tight whitespace-nowrap">
           CTRL.ALT.DELTA.
         </span>
-      </h1>
+      </h1> */}
 
-      {/* Spotlight effects - hidden on mobile for performance */}
-      <div className="hidden sm:block absolute bottom-[15%] left-[55%] w-[400px] h-[500px] bg-linear-to-bl from-white/8 via-white/2 to-transparent blur-3xl pointer-events-none z-9" />
-      <div className="hidden sm:block absolute bottom-[25%] left-[52%] w-[200px] h-[350px] bg-white/4 blur-2xl pointer-events-none z-9" />
+      {/* Ambient glow effects */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#ff007f]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#ff007f]/3 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Moon + Robot Container */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none" style={{ width: "100vw", height: "100vw", maxWidth: "1200px", maxHeight: "1200px" }}>
-        {/* Moon */}
+      <div className="absolute bottom-0 right-[-25%] sm:right-[-15%] md:right-[-5%] lg:right-0 pointer-events-none" style={{ width: "100vw", height: "100vw", maxWidth: "1200px", maxHeight: "1200px" }}>
+        {/* Moon with enhanced glow */}
         <div
           ref={moonRef}
           className="absolute left-1/2 -translate-x-1/2 w-full h-full"
           style={{ bottom: "-85%" }}
         >
-          <div className="absolute inset-0 rounded-full bg-linear-to-t from-transparent via-[#9d174d]/20 to-[#db2777]/30 blur-[60px] scale-110" />
-          <div className="absolute -inset-1 rounded-full bg-linear-to-t from-transparent via-[#be185d]/40 to-[#db2777]/60 blur-md" />
-          <div className="absolute inset-0 rounded-full bg-[#050507]" />
-          <div className="absolute inset-0.5 rounded-full bg-linear-to-t from-[#0a0a0f] via-[#070709] to-[#0a0a10]" />
-          <div className="absolute inset-x-0 bottom-0 h-[60%] bg-linear-to-t from-[#0a0a0f] via-[#0a0a0f]/90 to-transparent" />
+          <div className="absolute inset-0 rounded-full bg-linear-to-t from-transparent via-[#ff007f]/15 to-[#ff007f]/25 blur-[80px] scale-110" />
+          <div className="absolute -inset-1 rounded-full bg-linear-to-t from-transparent via-[#ff007f]/30 to-[#ff007f]/50 blur-md" />
+          <div className="absolute inset-0 rounded-full bg-[#030305]" />
+          <div className="absolute inset-0.5 rounded-full bg-linear-to-t from-[#050508] via-[#040406] to-[#060608]" />
+          <div className="absolute inset-x-0 bottom-0 h-[60%] bg-linear-to-t from-[#050508] via-[#050508]/90 to-transparent" />
         </div>
 
         {/* Robot Image */}
         <div
           ref={robotRef}
           className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10"
-          style={{ width: "min(45vw, 600px)" }}
+          style={{ width: "min(55vw, 750px)" }}
         >
           <img
             src="/images/robot.png"
             alt="AI Robot"
             className="w-full h-auto object-contain block"
             style={{
-              filter: "drop-shadow(0 0 60px rgba(219, 39, 119, 0.3))",
+              filter: "drop-shadow(0 0 80px rgba(255, 0, 127, 0.4))",
               marginBottom: "-4px",
             }}
           />
         </div>
       </div>
 
-      {/* Left Content */}
+      {/* HUD Interface - Removed as per request */}
+
+      {/* Main Content - Left side */}
       <div
-        ref={leftContentRef}
-        className="absolute left-3 sm:left-4 md:left-8 lg:left-16 top-[20%] sm:top-[30%] md:top-1/2 md:-translate-y-1/2 z-20 max-w-[280px] sm:max-w-md md:max-w-lg lg:max-w-xl"
+        ref={contentRef}
+        className="absolute left-6 sm:left-12 md:left-24 lg:left-40 top-[55%] -translate-y-1/2 z-30 max-w-[300px] sm:max-w-md md:max-w-lg lg:max-w-xl"
       >
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-white leading-tight mb-3 sm:mb-4">
-          Stop Renting Software.
+        {/* Main Headline */}
+        <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
+          STOP RENTING SOFTWARE.
           <br />
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">Start Owning AI Assets.</span>
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ff007f] to-[#ff6b6b]">
+            START OWNING AI ASSETS.
+          </span>
         </h2>
-        <p className="text-gray-400 text-xs sm:text-sm md:text-base lg:text-lg mb-4 sm:mb-6 leading-relaxed hidden sm:block">
-          Your startup's valuation depends on the IP you own, not the SaaS you rent. We build proprietary AI infrastructure that belongs to you—automating your operations and increasing your company's asset value.
+
+        {/* Subheadline */}
+        <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 leading-relaxed max-w-lg">
+          We build proprietary AI infrastructure that belongs to <span className="text-white font-medium">you</span>. 
+          Stop leasing your company's intelligence to big tech and secure your long-term valuation.
         </p>
-        <p className="text-gray-400 text-xs sm:hidden mb-4 leading-relaxed">
-          We build proprietary AI infrastructure that belongs to you. No monthly fees. 100% Code Ownership.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button
-            className="bg-[#ea0d7c] hover:bg-[#ea0d7c]/90 text-white rounded-full px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base font-semibold"
-          >
-            Audit My Workflow <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
-          <Button
-            variant="outline"
-            className="border-white/20 text-white hover:bg-white/10 rounded-full px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-transparent text-xs sm:text-sm md:text-base font-semibold hidden sm:flex"
-          >
-            Chat with Delta-1
-          </Button>
+
+        {/* Single Primary CTA */}
+        <Button
+          className="bg-[#ff007f] hover:bg-[#ff007f]/90 text-white rounded-full px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg font-bold shadow-[0_0_40px_rgba(255,0,127,0.4)] hover:shadow-[0_0_60px_rgba(255,0,127,0.6)] transition-all duration-300 hover:scale-[1.02]"
+        >
+          BOOK STRATEGY CALL <ArrowRight className="w-5 h-5 ml-2" />
+        </Button>
+
+        {/* Trust Bar - Horizontal layout beneath CTA */}
+        <div
+          ref={trustBarRef}
+          className="mt-8 sm:mt-10 md:mt-12"
+        >
+          <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#ff007f]/10 border border-[#ff007f]/20 flex items-center justify-center">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#ff007f]" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm sm:text-base">100%</p>
+                <p className="text-gray-500 text-[10px] sm:text-xs">IP Ownership</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#ff007f]/10 border border-[#ff007f]/20 flex items-center justify-center">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-[#ff007f]" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm sm:text-base">4-8 Wks</p>
+                <p className="text-gray-500 text-[10px] sm:text-xs">Launch Time</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#ff007f]/10 border border-[#ff007f]/20 flex items-center justify-center">
+                <Gem className="w-4 h-4 sm:w-5 sm:h-5 text-[#ff007f]" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm sm:text-base">0%</p>
+                <p className="text-gray-500 text-[10px] sm:text-xs">Equity Taken</p>
+              </div>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#ff007f]/10 border border-[#ff007f]/20 flex items-center justify-center">
+                <Headphones className="w-4 h-4 sm:w-5 sm:h-5 text-[#ff007f]" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm sm:text-base">24/7</p>
+                <p className="text-gray-500 text-[10px] sm:text-xs">Support</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Right Stats */}
-      <div
-        ref={rightStatsRef}
-        className="absolute right-3 sm:right-4 md:right-8 lg:right-16 top-[25%] sm:top-1/2 sm:-translate-y-1/2 z-20 space-y-2 sm:space-y-4 md:space-y-6 hidden xs:block"
-      >
-        <div className="text-right p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0a0a0f]/60 border border-white/6">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-[#ea0d7c]">100%</p>
-          <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-xs">IP Ownership</p>
-        </div>
-
-        <div className="text-right p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0a0a0f]/60 border border-white/6">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-[#ea0d7c]">4-8 Wks</p>
-          <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-xs">MVP Launch</p>
-        </div>
-
-        <div className="text-right p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0a0a0f]/60 border border-white/6">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-[#ea0d7c]">0%</p>
-          <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-xs">Equity Taken</p>
-        </div>
-
-        <div className="text-right p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0a0a0f]/60 border border-white/6 hidden sm:block">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-[#ea0d7c]">24/7</p>
-          <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-xs">Agent Support</p>
-        </div>
-      </div>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#050508] to-transparent pointer-events-none z-10" />
     </section>
   )
 }

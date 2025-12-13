@@ -53,7 +53,7 @@ export function FounderSection() {
           <p className="text-[#ea0d7c] text-sm font-semibold uppercase tracking-widest mb-4">
             Meet The Founder
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
+          <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
             The Mind Behind{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">
               Ctrl.Alt.Delta
@@ -64,7 +64,7 @@ export function FounderSection() {
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Image */}
           <div ref={imageRef} className="relative">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-linear-to-br from-[#ea0d7c]/20 via-[#0a0a0f] to-[#0a0a0f] border border-white/6">
+            <div className="relative aspect-4/5 rounded-3xl overflow-hidden bg-linear-to-br from-[#ea0d7c]/20 via-[#0a0a0f] to-[#0a0a0f] border border-white/6">
               {/* Profile Image */}
               <div className="absolute inset-0">
                 <Image 

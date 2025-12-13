@@ -3,42 +3,54 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ArrowUpRight, TrendingUp, Clock, DollarSign } from "lucide-react"
+import { ArrowUpRight, Database, Mic, Eye, Server, Globe, Cpu, Layers, Zap } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const caseStudies = [
-  {
-    company: "VisionSense Analytics",
-    industry: "Computer Vision / Retail Tech",
-    image: "/images/case-1.jpg",
-    challenge: "Traditional customer feedback surveys have a <2% response rate. A retail client needed a way to measure authentic customer satisfaction in real-time without interrupting the shopping experience.",
-    solution: "We engineered a custom Convolutional Neural Network (CNN) optimized for edge deployment. The system analyzes micro-expressions via standard webcams to categorize customer sentiment instantly.",
-    results: [
-      { icon: TrendingUp, value: "92%", label: "Model Accuracy" },
-      { icon: Clock, value: "<100ms", label: "Real-Time Latency" },
-      { icon: DollarSign, value: "GDPR", label: "Compliant" },
-    ],
-    quote: "Validated on FER-2013. No video storage required.",
-  },
-]
-
 export function CaseStudiesSection() {
   const sectionRef = useRef<HTMLElement>(null)
-  const cardsRef = useRef<HTMLDivElement[]>([])
+  const heroRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(cardsRef.current, {
-        y: 60,
+      // Header Animation
+      gsap.from(".section-header > *", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".section-header",
+          start: "top 80%",
+        }
+      })
+
+      // Hero Card Animation
+      gsap.from(heroRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top 85%",
+        }
+      })
+
+      // Grid Cards Animation
+      gsap.from(".venture-card", {
+        y: 50,
+        opacity: 0,
         duration: 0.8,
         stagger: 0.2,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: ".case-studies-container",
+          trigger: gridRef.current,
           start: "top 85%",
-        },
+        }
       })
+
     }, sectionRef)
 
     return () => ctx.revert()
@@ -48,98 +60,158 @@ export function CaseStudiesSection() {
     <section
       ref={sectionRef}
       id="results"
-      className="relative py-32 px-4 md:px-6 overflow-hidden"
+      className="relative py-32 px-4 md:px-6 bg-black overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#ea0d7c]/10 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#ea0d7c]/5 rounded-full blur-[150px]" />
-      </div>
+      {/* Background Grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.15]" 
+           style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+      />
+      
+      {/* Ambient Glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#ea0d7c]/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
+        
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <p className="text-[#ea0d7c] text-sm font-semibold uppercase tracking-widest mb-4">
-            Case Studies
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
-            Real Results,{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">
-              Real Impact
-            </span>
+        <div className="section-header mb-20">
+          <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
+            Labs & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ea0d7c] to-[#ff6b6b]">Ventures</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Don't take our word for it. See how we've helped founders like you achieve breakthrough results.
+          <div className="h-1 w-24 bg-[#ea0d7c] mb-6" />
+          <p className="text-gray-400 text-lg max-w-2xl font-light">
+            We don't just write code. We engineer scalable systems. Explore our internal ventures and R&D protocols.
           </p>
         </div>
 
-        {/* Case Studies Grid */}
-        <div className="case-studies-container space-y-8">
-          {caseStudies.map((study, index) => (
-            <div
-              key={study.company}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el
-              }}
-              className="group relative rounded-3xl bg-[#0a0a0f]/80 border border-white/6 hover:border-[#ea0d7c]/20 transition-all duration-500 overflow-hidden"
-            >
-              <div className="grid lg:grid-cols-2 gap-0">
-                {/* Image/Visual Side */}
-                <div className="relative h-64 lg:h-auto bg-linear-to-br from-[#ea0d7c]/20 to-[#0a0a0f] flex items-center justify-center p-8">
-                  <div className="text-center">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#ea0d7c]/20 border border-[#ea0d7c]/30 flex items-center justify-center">
-                      <span className="text-3xl font-black text-[#ea0d7c]">
-                        {study.company.charAt(0)}
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-1">{study.company}</h3>
-                    <span className="text-[#ea0d7c] text-sm font-medium">{study.industry}</span>
-                  </div>
-                  
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-32 h-32 border border-[#ea0d7c]/10 rounded-full" />
-                  <div className="absolute bottom-4 left-4 w-24 h-24 border border-[#ea0d7c]/10 rounded-full" />
-                </div>
-
-                {/* Content Side */}
-                <div className="p-8 lg:p-10">
-                  {/* Challenge & Solution */}
-                  <div className="space-y-4 mb-8">
-                    <div>
-                      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">The Challenge</span>
-                      <p className="text-gray-300 mt-1">{study.challenge}</p>
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#ea0d7c] uppercase tracking-wider">Our Solution</span>
-                      <p className="text-white font-medium mt-1">{study.solution}</p>
-                    </div>
-                  </div>
-
-                  {/* Results */}
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    {study.results.map((result) => (
-                      <div key={result.label} className="text-center p-3 rounded-xl bg-white/2 border border-white/4">
-                        <result.icon className="w-5 h-5 text-[#ea0d7c] mx-auto mb-2" />
-                        <div className="text-xl font-bold text-white">{result.value}</div>
-                        <div className="text-xs text-gray-500">{result.label}</div>
+        <div className="space-y-6">
+          {/* Row 1: Flagship Hero Card */}
+          <div 
+            ref={heroRef}
+            className="group relative w-full rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-[#ea0d7c]/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(234,13,124,0.1)]"
+          >
+            <div className="grid lg:grid-cols-5 min-h-[400px]">
+              {/* Visual / Blueprint Area */}
+              <div className="lg:col-span-2 bg-black/40 border-b lg:border-b-0 lg:border-r border-white/10 relative overflow-hidden p-8 flex items-center justify-center">
+                {/* Blueprint Grid */}
+                <div className="absolute inset-0 opacity-20" 
+                     style={{ backgroundImage: 'radial-gradient(#ea0d7c 1px, transparent 1px)', backgroundSize: '20px 20px' }} 
+                />
+                
+                {/* Animated Wireframe Elements */}
+                <div className="relative w-full max-w-[240px] aspect-square border border-[#ea0d7c]/30 rounded-lg p-4 flex flex-col gap-3">
+                   <div className="w-full h-2 bg-[#ea0d7c]/20 rounded animate-pulse" />
+                   <div className="flex gap-2">
+                      <div className="w-1/3 h-20 bg-[#ea0d7c]/10 rounded border border-[#ea0d7c]/20" />
+                      <div className="w-2/3 h-20 bg-[#ea0d7c]/10 rounded border border-[#ea0d7c]/20 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-[1px] bg-[#ea0d7c]/50 animate-[scan_2s_linear_infinite]" />
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <blockquote className="border-l-2 border-[#ea0d7c] pl-4 italic text-gray-400">
-                    "{study.quote}"
-                  </blockquote>
-
-                  {/* CTA */}
-                  <div className="mt-6 flex items-center gap-2 text-[#ea0d7c] group-hover:gap-3 transition-all duration-300 cursor-pointer">
-                    <span className="text-sm font-semibold">Read Full Case Study</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
+                   </div>
+                   <div className="w-full h-2 bg-[#ea0d7c]/20 rounded animate-pulse delay-75" />
+                   <div className="w-2/3 h-2 bg-[#ea0d7c]/20 rounded animate-pulse delay-150" />
+                   
+                   {/* Floating Badge */}
+                   <div className="absolute -top-3 -right-3 bg-[#ea0d7c] text-black text-[10px] font-bold px-2 py-0.5 rounded">
+                     V2.0
+                   </div>
                 </div>
               </div>
+
+              {/* Content Area */}
+              <div className="lg:col-span-3 p-8 md:p-12 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold tracking-widest uppercase">
+                    Internal Venture
+                  </span>
+                  <span className="flex items-center gap-1 text-xs text-gray-500 font-mono">
+                    <Globe className="w-3 h-3" />
+                    Public Beta
+                  </span>
+                </div>
+
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  HirePrint AI
+                </h3>
+                <p className="text-xl text-gray-300 font-light mb-6">
+                  The Self-Organizing Freelance Economy.
+                </p>
+                <p className="text-gray-400 leading-relaxed mb-8 max-w-xl">
+                  A B2B marketplace architecture featuring Dual-Role context switching, Stripe Connect Escrow integration, and Gemini Agentic AI for automated scope generation.
+                </p>
+
+                {/* Tech Stack Pills */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {["Laravel 12", "Stripe Connect", "Gemini 2.0", "Next.js 14"].map((tech) => (
+                    <span key={tech} className="px-3 py-1.5 rounded bg-white/5 border border-white/10 text-gray-300 text-xs font-mono hover:bg-white/10 transition-colors cursor-default">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <button className="flex items-center gap-2 text-[#ea0d7c] font-bold uppercase tracking-wider text-sm group-hover:gap-3 transition-all">
+                  View Architecture <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Row 2: Capability Grid */}
+          <div ref={gridRef} className="grid md:grid-cols-3 gap-6">
+            
+            {/* Card A: VisionSense */}
+            <div className="venture-card group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-[#ea0d7c]/50 transition-all duration-500 hover:-translate-y-1">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400">
+                  <Eye className="w-6 h-6" />
+                </div>
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest border border-white/10 px-2 py-1 rounded">
+                  R&D Protocol
+                </span>
+              </div>
+              <h4 className="text-xl font-bold text-white mb-2">VisionSense</h4>
+              <p className="text-gray-400 text-sm mb-6">Edge-Based Sentiment Analysis.</p>
+              <div className="pt-6 border-t border-white/5">
+                <div className="text-3xl font-black text-white mb-1">92%</div>
+                <div className="text-xs text-gray-500 uppercase tracking-wider">Model Accuracy</div>
+              </div>
+            </div>
+
+            {/* Card B: Delta Scraper */}
+            <div className="venture-card group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-[#ea0d7c]/50 transition-all duration-500 hover:-translate-y-1">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400">
+                  <Database className="w-6 h-6" />
+                </div>
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest border border-white/10 px-2 py-1 rounded">
+                  Internal Tool
+                </span>
+              </div>
+              <h4 className="text-xl font-bold text-white mb-2">Delta Scraper</h4>
+              <p className="text-gray-400 text-sm mb-6">High-Velocity Lead Engine.</p>
+              <div className="pt-6 border-t border-white/5">
+                <div className="text-3xl font-black text-white mb-1">10k</div>
+                <div className="text-xs text-gray-500 uppercase tracking-wider">Leads / Hour</div>
+              </div>
+            </div>
+
+            {/* Card C: Voice-01 */}
+            <div className="venture-card group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-[#ea0d7c]/50 transition-all duration-500 hover:-translate-y-1">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400">
+                  <Mic className="w-6 h-6" />
+                </div>
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest border border-white/10 px-2 py-1 rounded">
+                  Prototype
+                </span>
+              </div>
+              <h4 className="text-xl font-bold text-white mb-2">Voice-01</h4>
+              <p className="text-gray-400 text-sm mb-6">Real-Time Voice Agent.</p>
+              <div className="pt-6 border-t border-white/5">
+                <div className="text-3xl font-black text-white mb-1">&lt;500ms</div>
+                <div className="text-xs text-gray-500 uppercase tracking-wider">Latency</div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
