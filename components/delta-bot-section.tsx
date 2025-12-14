@@ -56,7 +56,7 @@ export function DeltaBotSection() {
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-linear-to-b from-[#0a0a0f] via-[#0f0a12] to-[#0a0a0f]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ea0d7c]/8 rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-[#ea0d7c]/8 rounded-full blur-[150px]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">

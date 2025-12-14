@@ -65,8 +65,8 @@ export function FounderSection() {
       />
 
       {/* Ambient Glow */}
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#D1006B]/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-[#D1006B]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-125 h-125 bg-[#D1006B]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-100 h-100 bg-[#D1006B]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
@@ -100,7 +100,7 @@ export function FounderSection() {
           >
             <motion.div
               ref={cardRef}
-              className="relative w-full max-w-[400px] aspect-3/4 cursor-pointer"
+              className="relative w-full max-w-100 aspect-3/4 cursor-pointer"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               style={{
@@ -114,7 +114,7 @@ export function FounderSection() {
                 
                 {/* Dynamic Glow that follows cursor */}
                 <motion.div
-                  className="absolute w-[200px] h-[200px] bg-[#D1006B]/30 rounded-full blur-[80px] pointer-events-none"
+                  className="absolute w-50 h-50 bg-[#D1006B]/30 rounded-full blur-[80px] pointer-events-none"
                   style={{
                     left: glowX,
                     top: glowY,

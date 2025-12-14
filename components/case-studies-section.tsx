@@ -82,7 +82,7 @@ export function CaseStudiesSection() {
       />
       
       {/* Ambient Glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#ea0d7c]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-125 h-125 bg-[#ea0d7c]/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -103,7 +103,7 @@ export function CaseStudiesSection() {
             ref={heroRef}
             className="group relative w-full rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-[#ea0d7c]/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(234,13,124,0.1)]"
           >
-            <div className="grid lg:grid-cols-5 min-h-[400px]">
+            <div className="grid lg:grid-cols-5 min-h-100">
               {/* Visual / Blueprint Area */}
               <div className="lg:col-span-2 bg-black/40 border-b lg:border-b-0 lg:border-r border-white/10 relative overflow-hidden p-8 flex items-center justify-center">
                 {/* Blueprint Grid */}

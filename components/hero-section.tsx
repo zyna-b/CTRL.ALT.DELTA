@@ -133,8 +133,8 @@ export function HeroSection() {
       </h1> */}
 
       {/* Ambient glow effects */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#ff007f]/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#ff007f]/3 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-150 h-150 bg-[#ff007f]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-[#ff007f]/3 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Moon + Robot Container */}
       <div className="absolute bottom-0 right-[-25%] sm:right-[-15%] md:right-[-5%] lg:right-0 pointer-events-none" style={{ width: "100vw", height: "100vw", maxWidth: "1200px", maxHeight: "1200px" }}>
@@ -174,7 +174,7 @@ export function HeroSection() {
       {/* Main Content - Left side */}
       <div
         ref={contentRef}
-        className="absolute left-6 sm:left-12 md:left-24 lg:left-40 top-[55%] -translate-y-1/2 z-30 max-w-[300px] sm:max-w-md md:max-w-lg lg:max-w-xl"
+        className="absolute left-6 sm:left-12 md:left-24 lg:left-40 top-[55%] -translate-y-1/2 z-30 max-w-75 sm:max-w-md md:max-w-lg lg:max-w-xl"
       >
         {/* Main Headline */}
         <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">

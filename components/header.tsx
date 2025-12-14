@@ -57,7 +57,7 @@ export function Header() {
         ? "bg-[#050508]/80 backdrop-blur-xl border-b border-[#ff007f]/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]" 
         : "bg-[#050508]/40 backdrop-blur-md"
     }`}>
-      <nav className={`max-w-[1400px] mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-500 ${
+      <nav className={`max-w-350 mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-500 ${
       scrolled ? "py-3" : "py-5"
     }`}>
         {/* Logo */}
@@ -73,7 +73,7 @@ export function Header() {
               className="object-contain group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-all duration-500"
             />
           </div>
-          <div className="overflow-hidden max-w-0 group-hover:max-w-[200px] transition-all duration-500 ease-in-out">
+          <div className="overflow-hidden max-w-0 group-hover:max-w-50 transition-all duration-500 ease-in-out">
             <span className="text-white font-bold text-lg tracking-tight whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               Ctrl.Alt.Delta
             </span>
@@ -124,13 +124,13 @@ export function Header() {
           >
             <div className="relative w-5 h-5">
               <span className={`absolute left-0 w-5 h-0.5 bg-current transition-all duration-300 ${
-                mobileMenuOpen ? "top-[9px] rotate-45" : "top-1"
+                mobileMenuOpen ? "top-2.25 rotate-45" : "top-1"
               }`} />
-              <span className={`absolute left-0 top-[9px] w-5 h-0.5 bg-current transition-all duration-300 ${
+              <span className={`absolute left-0 top-2.25 w-5 h-0.5 bg-current transition-all duration-300 ${
                 mobileMenuOpen ? "opacity-0 scale-0" : "opacity-100"
               }`} />
               <span className={`absolute left-0 w-5 h-0.5 bg-current transition-all duration-300 ${
-                mobileMenuOpen ? "top-[9px] -rotate-45" : "top-[17px]"
+                mobileMenuOpen ? "top-2.25 -rotate-45" : "top-4.25"
               }`} />
             </div>
           </button>
@@ -139,9 +139,9 @@ export function Header() {
 
       {/* Mobile Menu */}
       <div className={`lg:hidden absolute top-full left-0 right-0 bg-[#050508]/95 backdrop-blur-2xl border-b border-[#ff007f]/10 shadow-lg transition-all duration-500 overflow-hidden ${
-        mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        mobileMenuOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"
       }`}>
-        <div className="max-w-[1400px] mx-auto px-6 py-6">
+        <div className="max-w-350 mx-auto px-6 py-6">
           <div className="flex flex-col gap-1">
             {/* AI Status for Mobile */}
             <div className="flex items-center gap-2 px-4 py-3 mb-2 rounded-lg bg-[#ff007f]/10 border border-[#ff007f]/20">

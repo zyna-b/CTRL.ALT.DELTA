@@ -108,18 +108,18 @@ export function GrowthEngine() {
           {services.map((service, i) => (
             <div
               key={i}
-              className="group relative p-6 md:p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-[#c026d3]/30 transition-all duration-500 backdrop-blur-sm overflow-hidden"
+              className="group relative p-6 md:p-8 rounded-3xl bg-white/2 border border-white/5 hover:border-[#c026d3]/30 transition-all duration-500 backdrop-blur-sm overflow-hidden"
             >
               {/* Glow effect */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                className={`absolute inset-0 bg-linear-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
 
               {/* Shadow behind card */}
-              <div className="absolute -inset-px bg-gradient-to-br from-[#c026d3]/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity -z-10" />
+              <div className="absolute -inset-px bg-linear-to-br from-[#c026d3]/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity -z-10" />
 
               <div className="relative z-10">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-[#c026d3]/20 to-[#c026d3]/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-linear-to-br from-[#c026d3]/20 to-[#c026d3]/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <service.icon className="w-7 h-7 md:w-8 md:h-8 text-[#c026d3]" />
                 </div>
 

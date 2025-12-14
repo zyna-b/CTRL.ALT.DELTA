@@ -41,7 +41,7 @@ export function ContactSection() {
     <section ref={sectionRef} id="contact" className="relative py-32 px-4 md:px-6 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#ea0d7c]/10 rounded-full blur-[200px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250000px] bg-[#ea0d7c]/10 rounded-full blur-[200px]" />
       </div>
 
       {/* Grid pattern */}
@@ -61,7 +61,7 @@ export function ContactSection() {
       <div ref={contentRef} className="max-w-5xl mx-auto relative z-10">
         <div className="text-center p-8 md:p-16 rounded-[40px] bg-[#0a0a0f]/80 border border-white/6 relative overflow-hidden">
           {/* Inner glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-[#ea0d7c]/20 rounded-full blur-[120px]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-125 h-75 bg-[#ea0d7c]/20 rounded-full blur-[120px]" />
 
           <div className="relative z-10">
             {/* Badge */}

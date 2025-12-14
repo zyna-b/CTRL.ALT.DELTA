@@ -80,8 +80,8 @@ export function PricingSection() {
     <section className="relative py-32 px-4 md:px-6 overflow-hidden bg-black">
       {/* Background Ambient Glow */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#D1006B]/10 rounded-full blur-[200px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#D1006B]/5 rounded-full blur-[150px]" />
+        <div className="absolute top-1/3 left-1/4 w-150 h-150 bg-[#D1006B]/10 rounded-full blur-[200px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-[#D1006B]/5 rounded-full blur-[150px]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -98,7 +98,7 @@ export function PricingSection() {
           </p>
           <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
             Invest in{" "}
-            <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-[#D1006B] to-[#ff6b6b]">
+            <span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-[#D1006B] to-[#ff6b6b]">
               Assets,
             </span>
             <br />
@@ -155,7 +155,7 @@ export function PricingSection() {
             >
               {/* Gradient border for selected card */}
               {selectedTierId === tier.id && (
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#D1006B]/20 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-[#D1006B]/20 via-transparent to-transparent pointer-events-none" />
               )}
 
 
@@ -177,12 +177,12 @@ export function PricingSection() {
               </div>
 
               {/* Hook */}
-              <p className="text-gray-300 leading-relaxed mb-6 text-sm relative z-10 min-h-[80px]">
+              <p className="text-gray-300 leading-relaxed mb-6 text-sm relative z-10 min-h-20">
                 {tier.hook}
               </p>
 
               {/* Features - All Visible */}
-              <ul className="space-y-3 mb-8 relative z-10 flex-grow">
+              <ul className="space-y-3 mb-8 relative z-10 grow">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#D1006B]/20 flex items-center justify-center shrink-0 mt-0.5">
