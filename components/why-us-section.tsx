@@ -50,23 +50,23 @@ export function WhyUsSection() {
         if (!isRange && !isNaN(endValue)) {
             gsap.from(valueEl, {
                 textContent: 0,
-                duration: 2,
-                ease: "power1.out",
+                duration: 1.5,
+                ease: "power4.out",
                 snap: { textContent: 1 },
-                stagger: 1,
+                stagger: 0.1,
                 scrollTrigger: {
                     trigger: item,
-                    start: "top 85%",
+                    start: "top bottom-=100",
                 },
             })
         } else {
              gsap.from(item, {
                 opacity: 0,
                 y: 20,
-                duration: 1,
+                duration: 0.8,
                 scrollTrigger: {
                     trigger: item,
-                    start: "top 85%",
+                    start: "top bottom-=100",
                 }
              })
         }
@@ -76,15 +76,15 @@ export function WhyUsSection() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: headerRef.current,
-          start: "top 75%",
+          start: "top bottom-=100",
         }
       })
 
-      tl.from(".header-label", { y: 20, opacity: 0, duration: 0.5 })
-        .from(".header-title-1", { x: -50, opacity: 0, duration: 0.6, ease: "back.out(1.7)" }, "-=0.3")
-        .from(".header-title-highlight", { scale: 0, opacity: 0, rotation: -10, duration: 0.6, ease: "elastic.out(1, 0.5)" }, "-=0.4")
-        .from(".header-title-2", { x: 50, opacity: 0, duration: 0.6, ease: "back.out(1.7)" }, "-=0.5")
-        .from(".header-desc", { y: 20, opacity: 0, duration: 0.5 }, "-=0.3")
+      tl.from(".header-label", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" })
+        .from(".header-title-1", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
+        .from(".header-title-highlight", { scale: 0.9, opacity: 0, duration: 0.8, ease: "expo.out" }, "-=0.6")
+        .from(".header-title-2", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.6")
+        .from(".header-desc", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
 
       // 3. Cards Animation (3D Flip Entrance)
       const cards = gsap.utils.toArray(".benefit-card")
@@ -92,15 +92,15 @@ export function WhyUsSection() {
       
       cards.forEach((card: any, i) => {
         gsap.from(card, {
-          y: 100,
-          rotationX: 45,
+          y: 50,
           opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          delay: i * 0.2,
+          scale: 0.95,
+          duration: 0.8,
+          ease: "expo.out",
+          delay: i * 0.1,
           scrollTrigger: {
             trigger: cardsRef.current,
-            start: "top 70%",
+            start: "top bottom-=100",
           }
         })
       })
@@ -117,7 +117,7 @@ export function WhyUsSection() {
     >
       {/* Dynamic Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0f0a12] to-[#0a0a0f]" />
+        <div className="absolute inset-0 bg-linear-to-brom-[#0a0a0f] via-[#0f0a12] to-[#0a0a0f]" />
         {/* Animated blobs */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#ea0d7c]/10 rounded-full blur-[100px] animate-pulse" />
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] animate-pulse delay-1000" />
@@ -154,7 +154,7 @@ export function WhyUsSection() {
           </p>
           <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
             <span className="header-title-1 inline-block">The</span>{" "}
-            <span className="header-title-highlight inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#ea0d7c] to-[#ff6b6b]">
+            <span className="header-title-highlight inline-block text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">
               "No-Black-Box"
             </span>{" "}
             <span className="header-title-2 inline-block">
@@ -174,10 +174,10 @@ export function WhyUsSection() {
               className="benefit-card group relative h-full"
             >
               {/* The Obsidian Card */}
-              <div className="relative h-full p-8 rounded-[2rem] bg-[#050505] border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-[#ea0d7c]/50 group-hover:shadow-[0_0_50px_rgba(234,13,124,0.15)] group-hover:-translate-y-2">
+              <div className="relative h-full p-8 rounded-4xl bg-[#050505] border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-[#ea0d7c]/50 group-hover:shadow-[0_0_50px_rgba(234,13,124,0.15)] group-hover:-translate-y-2">
                 
                 {/* Internal Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#ea0d7c]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-[#ea0d7c]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 {/* Animated Grid Background (Subtle) */}
                 <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-500 pointer-events-none" 
@@ -185,7 +185,7 @@ export function WhyUsSection() {
                 />
 
                 {/* Top Light Bar */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#ea0d7c] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-[#ea0d7c] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon Container */}
@@ -194,7 +194,7 @@ export function WhyUsSection() {
                       <benefit.icon className="w-8 h-8 text-white transition-colors duration-500" strokeWidth={1.5} />
                     </div>
                     {/* Connecting Line */}
-                    <div className="absolute top-16 left-8 w-[1px] h-full bg-gradient-to-b from-white/10 to-transparent -z-10 group-hover:from-[#ea0d7c]/50 transition-colors duration-500" />
+                    <div className="absolute top-16 left-8 w-px h-full bg-linear-to-b from-white/10 to-transparent -z-10 group-hover:from-[#ea0d7c]/50 transition-colors duration-500" />
                   </div>
 
                   <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#ea0d7c] transition-colors duration-300">

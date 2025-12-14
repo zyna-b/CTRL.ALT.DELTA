@@ -15,9 +15,10 @@ export function CaseStudiesSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Header Animation
-      gsap.from(".section-header > *", {
-        y: 30,
-        opacity: 0,
+      gsap.set(".section-header > *", { opacity: 0, y: 30 })
+      gsap.to(".section-header > *", {
+        y: 0,
+        opacity: 1,
         duration: 0.8,
         stagger: 0.1,
         scrollTrigger: {
@@ -27,9 +28,10 @@ export function CaseStudiesSection() {
       })
 
       // Hero Card Animation
-      gsap.from(heroRef.current, {
-        y: 50,
-        opacity: 0,
+      gsap.set(heroRef.current, { opacity: 0, y: 50 })
+      gsap.to(heroRef.current, {
+        y: 0,
+        opacity: 1,
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {
@@ -39,15 +41,27 @@ export function CaseStudiesSection() {
       })
 
       // Grid Cards Animation
-      gsap.from(".venture-card", {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 85%",
+      gsap.set(".venture-card", { opacity: 0, y: 50 })
+      
+      ScrollTrigger.batch(".venture-card", {
+        start: "top bottom-=100",
+        onEnter: (batch) => {
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+            overwrite: true
+          })
+        },
+        onLeaveBack: (batch) => {
+          gsap.to(batch, {
+            opacity: 0,
+            y: 50,
+            duration: 0.5,
+            overwrite: true
+          })
         }
       })
 
@@ -75,7 +89,7 @@ export function CaseStudiesSection() {
         {/* Section Header */}
         <div className="section-header mb-20">
           <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
-            Labs & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ea0d7c] to-[#ff6b6b]">Ventures</span>
+            Labs & <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">Ventures</span>
           </h2>
           <div className="h-1 w-24 bg-[#ea0d7c] mb-6" />
           <p className="text-gray-400 text-lg max-w-2xl font-light">
@@ -98,12 +112,12 @@ export function CaseStudiesSection() {
                 />
                 
                 {/* Animated Wireframe Elements */}
-                <div className="relative w-full max-w-[240px] aspect-square border border-[#ea0d7c]/30 rounded-lg p-4 flex flex-col gap-3">
+                <div className="relative w-full max-w-60 aspect-square border border-[#ea0d7c]/30 rounded-lg p-4 flex flex-col gap-3">
                    <div className="w-full h-2 bg-[#ea0d7c]/20 rounded animate-pulse" />
                    <div className="flex gap-2">
                       <div className="w-1/3 h-20 bg-[#ea0d7c]/10 rounded border border-[#ea0d7c]/20" />
                       <div className="w-2/3 h-20 bg-[#ea0d7c]/10 rounded border border-[#ea0d7c]/20 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-[1px] bg-[#ea0d7c]/50 animate-[scan_2s_linear_infinite]" />
+                        <div className="absolute top-0 left-0 w-full h-px bg-[#ea0d7c]/50 animate-[scan_2s_linear_infinite]" />
                       </div>
                    </div>
                    <div className="w-full h-2 bg-[#ea0d7c]/20 rounded animate-pulse delay-75" />

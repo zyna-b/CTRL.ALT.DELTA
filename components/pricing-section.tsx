@@ -1,158 +1,192 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef, useState } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Check, Sparkles } from "lucide-react"
-
-gsap.registerPlugin(ScrollTrigger)
+import { ArrowRight, Check, Zap, Rocket, Users } from "lucide-react"
 
 const pricingTiers = [
   {
-    name: "MVP Sprint",
-    description: "Perfect for validating your idea fast",
-    price: "Custom",
-    period: "one-time",
-    popular: false,
+    id: "workflows",
+    name: "AI WORKFLOWS",
+    price: "$499",
+    subtitle: "Per Workflow / Fixed Scope",
+    hook: "Stop paying humans to do robot work. Eliminate manual bottlenecks in days.",
+    icon: Zap,
     features: [
-      "Full MVP development",
-      "4-6 week delivery",
-      "Core features prioritized",
-      "Responsive design",
-      "1 month post-launch support",
-      "Source code ownership",
+      "1 Complex Automation (n8n/Zapier)",
+      "AI Agent Integration",
+      "3-Day Turnaround",
+      "Video Training Handoff",
+      "30-Day Broken Link Warranty",
     ],
-    cta: "Book Discovery Call",
+    cta: "Automate Now",
   },
   {
-    name: "AI Integration",
-    description: "Add AI superpowers to your business",
-    price: "Custom",
-    period: "project-based",
-    popular: true,
+    id: "mvp",
+    name: "MVP SPRINT",
+    price: "Starts at $1,499",
+    subtitle: "4-Week Rapid Launch",
+    hook: "Your idea is worthless until it ships. We build market-ready products, not prototypes.",
+    icon: Rocket,
     features: [
-      "Custom AI solution design",
-      "Chatbot / Assistant development",
-      "Workflow automation",
-      "Integration with existing tools",
-      "Training & documentation",
-      "3 months support included",
+      "Full-Stack App (Next.js/React)",
+      "Database & Auth Setup",
+      "Stripe Payments Integration",
+      "Basic Admin Dashboard",
+      "Deployment to Vercel/AWS",
+      "Source Code Ownership",
     ],
-    cta: "Book Discovery Call",
+    cta: "Start Your Build",
   },
   {
-    name: "Growth Partner",
-    description: "Ongoing AI & tech partnership",
-    price: "Custom",
-    period: "monthly retainer",
-    popular: false,
+    id: "partner",
+    name: "FRACTIONAL PARTNER",
+    price: "$1,999",
+    subtitle: "/ mo · Pause or Cancel Anytime",
+    hook: "Stop looking for a CTO. Hire a senior engineering partner for less than a junior dev's salary.",
+    icon: Users,
     features: [
-      "Dedicated development team",
-      "Priority support 24/7",
-      "Continuous improvements",
-      "New feature development",
-      "Performance optimization",
-      "Strategic AI consulting",
+      "~20 Hours Dedicated Dev Time",
+      "Priority Weekend Support",
+      "Strategic AI Consulting",
+      "Direct Slack Access",
+      "Regular Code Audits",
+      "Roadmap Planning",
     ],
-    cta: "Book Discovery Call",
+    cta: "Hire Monthly",
   },
 ]
 
 export function PricingSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const cardsRef = useRef<HTMLDivElement[]>([])
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 })
+  const [selectedTierId, setSelectedTierId] = useState("mvp") // Default to MVP card
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, index) => {
-        gsap.from(card, {
-          y: 60,
-          opacity: 0,
-          duration: 0.8,
-          delay: index * 0.15,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-          },
-        })
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    setSpotlightPos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+  }
 
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-32 px-4 md:px-6 overflow-hidden"
-    >
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#ea0d7c]/5 rounded-full blur-[200px]" />
+    <section className="relative py-32 px-4 md:px-6 overflow-hidden bg-black">
+      {/* Background Ambient Glow */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#D1006B]/10 rounded-full blur-[200px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#D1006B]/5 rounded-full blur-[150px]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-[#ea0d7c] text-sm font-semibold uppercase tracking-widest mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <p className="text-[#D1006B] text-sm font-semibold uppercase tracking-widest mb-4">
             Pricing
           </p>
           <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
-            Investment in{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#ea0d7c] to-[#ff6b6b]">
-              Your Growth
+            Invest in{" "}
+            <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-[#D1006B] to-[#ff6b6b]">
+              Assets,
             </span>
+            <br />
+            Not Expenses.
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Every project is unique. We'll create a custom proposal based on your specific needs and goals.
+            Transparent pricing designed for speed and ROI. No bloated contracts.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Pricing Cards Grid with Spotlight */}
+        <div
+          ref={containerRef}
+          onMouseMove={handleMouseMove}
+          className="relative grid md:grid-cols-3 gap-6 lg:gap-8"
+          style={{
+            "--spotlight-x": `${spotlightPos.x}px`,
+            "--spotlight-y": `${spotlightPos.y}px`,
+          } as React.CSSProperties & { "--spotlight-x": string; "--spotlight-y": string }}
+        >
+          {/* Spotlight Effect */}
+          <div
+            className="absolute inset-0 pointer-events-none rounded-3xl opacity-0 transition-opacity duration-200"
+            style={{
+              background: `radial-gradient(circle 400px at var(--spotlight-x) var(--spotlight-y), rgba(209, 0, 107, 0.15), transparent 80%)`,
+            }}
+          />
+
           {pricingTiers.map((tier, index) => (
-            <div
-              key={tier.name}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el
+            <motion.div
+              key={tier.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{
+                rotateX: -3,
+                rotateY: 3,
               }}
-              className={`relative p-8 rounded-3xl transition-all duration-500 ${
-                tier.popular
-                  ? "bg-linear-to-b from-[#ea0d7c]/20 to-[#0a0a0f] border-2 border-[#ea0d7c]/50 scale-105 shadow-[0_0_60px_rgba(234,13,124,0.2)]"
-                  : "bg-[#0a0a0f]/80 border border-white/6 hover:border-[#ea0d7c]/20"
-              }`}
+              style={{
+                transformStyle: "preserve-3d",
+                perspective: 1000,
+              }}
+              onClick={() => setSelectedTierId(tier.id)}
+              className={`relative p-8 rounded-3xl transition-all duration-500 group
+                bg-white/5 backdrop-blur-xl border cursor-pointer flex flex-col h-full
+                ${
+                  selectedTierId === tier.id
+                    ? "border-[#D1006B] shadow-[0_0_40px_rgba(209,0,107,0.3)]"
+                    : "border-gray-600 hover:border-[#D1006B]/50"
+                }
+                hover:bg-white/8
+              `}
             >
-              {/* Popular Badge */}
-              {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#ea0d7c] text-white text-sm font-semibold rounded-full">
-                    <Sparkles className="w-4 h-4" />
-                    Most Popular
-                  </span>
-                </div>
+              {/* Gradient border for selected card */}
+              {selectedTierId === tier.id && (
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#D1006B]/20 via-transparent to-transparent pointer-events-none" />
               )}
 
-              {/* Tier Info */}
-              <div className="text-center mb-8">
-                <h3 className="text-xl font-bold text-white mb-2">{tier.name}</h3>
-                <p className="text-gray-400 text-sm mb-6">{tier.description}</p>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-black text-[#ea0d7c]">{tier.price}</span>
-                </div>
-                <p className="text-gray-500 text-sm mt-1">{tier.period}</p>
+
+
+              {/* Icon */}
+              <div className="w-14 h-14 rounded-2xl bg-[#D1006B]/10 border border-[#D1006B]/30 flex items-center justify-center mb-6 group-hover:bg-[#D1006B]/20 transition-colors duration-300 relative z-10">
+                <tier.icon className="w-7 h-7 text-[#D1006B]" />
               </div>
 
-              {/* Features */}
-              <ul className="space-y-4 mb-8">
+              {/* Tier Info */}
+              <div className="mb-6 relative z-10">
+                <h3 className="text-lg font-bold text-[#D1006B] uppercase tracking-wider mb-2">
+                  {tier.name}
+                </h3>
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-4xl font-black text-white">{tier.price}</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-4">{tier.subtitle}</p>
+              </div>
+
+              {/* Hook */}
+              <p className="text-gray-300 leading-relaxed mb-6 text-sm relative z-10 min-h-[80px]">
+                {tier.hook}
+              </p>
+
+              {/* Features - All Visible */}
+              <ul className="space-y-3 mb-8 relative z-10 flex-grow">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#ea0d7c]/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-[#ea0d7c]" />
+                    <div className="w-5 h-5 rounded-full bg-[#D1006B]/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-[#D1006B]" />
                     </div>
                     <span className="text-gray-300 text-sm">{feature}</span>
                   </li>
@@ -162,32 +196,45 @@ export function PricingSection() {
               {/* CTA */}
               <Button
                 onClick={scrollToContact}
-                className={`w-full rounded-full py-6 text-sm font-semibold transition-all duration-300 ${
-                  tier.popular
-                    ? "bg-[#ea0d7c] hover:bg-[#ea0d7c]/90 text-white shadow-[0_0_30px_rgba(234,13,124,0.4)]"
-                    : "bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-[#ea0d7c]/30"
+                className={`w-full mt-auto rounded-full py-6 text-sm font-semibold transition-all duration-300 relative z-10 ${
+                  selectedTierId === tier.id
+                    ? "bg-[#D1006B] hover:bg-[#D1006B]/90 text-white shadow-[0_0_30px_rgba(209,0,107,0.4)]"
+                    : "bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-[#D1006B]/30"
                 }`}
               >
                 {tier.cta}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Bottom Note */}
-        <div className="text-center mt-12">
-          <p className="text-gray-400 text-sm">
-            Not sure which plan is right for you?{" "}
+        {/* Enterprise Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-16 pt-12 border-t border-white/10"
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 px-8 py-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
+            <div>
+              <h4 className="text-white font-bold text-lg mb-2">
+                Need a complex Enterprise Solution or Existing Platform Overhaul?
+              </h4>
+              <p className="text-gray-400 text-sm">
+                Custom architecture, team augmentation, and long-term partnerships.
+              </p>
+            </div>
             <button
               onClick={scrollToContact}
-              className="text-[#ea0d7c] font-semibold hover:underline"
+              className="group flex items-center gap-2 text-[#D1006B] font-semibold hover:text-[#ff6b6b] transition-colors whitespace-nowrap"
             >
-              Let's talk
-            </button>{" "}
-            — we'll help you find the perfect fit.
-          </p>
-        </div>
+              Let's discuss custom scope & pricing
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
