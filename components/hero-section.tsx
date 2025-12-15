@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Shield, Clock, Gem, Headphones } from "lucide-react"
 import gsap from "gsap"
@@ -157,9 +158,14 @@ export function HeroSection() {
           className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10"
           style={{ width: "min(55vw, 750px)" }}
         >
-          <img
+          <Image
             src="/images/robot.png"
             alt="AI Robot"
+            width={750}
+            height={750}
+            priority={true}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            placeholder="empty"
             className="w-full h-auto object-contain block"
             style={{
               filter: "drop-shadow(0 0 80px rgba(255, 0, 127, 0.4))",

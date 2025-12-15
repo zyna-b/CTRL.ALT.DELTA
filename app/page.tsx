@@ -9,8 +9,8 @@ import { WhyUsSection } from "@/components/why-us-section"
 import { CaseStudiesSection } from "@/components/case-studies-section"
 import { FounderSection } from "@/components/founder-section"
 import { PricingSection } from "@/components/pricing-section"
+import { CTASection } from "@/components/cta-section"
 import { FAQSection } from "@/components/faq-section"
-import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -26,8 +26,8 @@ export default function Home() {
       <CaseStudiesSection />
       <FounderSection />
       <PricingSection />
+      <CTASection />
       <FAQSection />
-      <ContactSection />
       <Footer />
       <DeltaBotWidget />
     </main>

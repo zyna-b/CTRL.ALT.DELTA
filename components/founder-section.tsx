@@ -27,6 +27,10 @@ export function FounderSection() {
   const glowX = useSpring(useTransform(mouseX, [-0.5, 0.5], [30, 70]), springConfig)
   const glowY = useSpring(useTransform(mouseY, [-0.5, 0.5], [30, 70]), springConfig)
 
+  // Pre-calculate all transforms (cannot be conditional in hooks)
+  const badgeTransformX = useTransform(textX, (v) => -v * 0.5)
+  const badgeTransformY = useTransform(textY, (v) => -v * 0.5)
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
@@ -35,7 +39,7 @@ export function FounderSection() {
   }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMobile || !cardRef.current) return
+    if (!cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
@@ -167,8 +171,8 @@ export function FounderSection() {
               <motion.div
                 className="absolute top-6 right-6 px-4 py-2 rounded-full bg-black/80 backdrop-blur-xl border border-[#D1006B]/50 flex items-center gap-2 shadow-[0_0_20px_rgba(209,0,107,0.4)]"
                 style={{
-                  x: isMobile ? 0 : useTransform(textX, (v) => -v * 0.5),
-                  y: isMobile ? 0 : useTransform(textY, (v) => -v * 0.5),
+                  x: isMobile ? 0 : badgeTransformX,
+                  y: isMobile ? 0 : badgeTransformY,
                   transformStyle: "preserve-3d",
                   translateZ: 60,
                 }}

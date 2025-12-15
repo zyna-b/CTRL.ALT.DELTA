@@ -33,8 +33,20 @@ const services = [
 export function ServicesSection() {
   return (
     <section id="services" className="relative py-32 px-4 md:px-6 bg-black overflow-hidden">
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(209, 0, 107, 0.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(209, 0, 107, 0.08) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+            maskImage: 'linear-gradient(180deg, white, rgba(255, 255, 255, 0))',
+          }}
+        />
+      </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
