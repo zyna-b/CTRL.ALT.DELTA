@@ -6,6 +6,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  turbopack: {
+    // Ensure Turbopack resolves the correct repo root when multiple lockfiles exist
+    root: './'
+  },
 }
 
 export default nextConfig
