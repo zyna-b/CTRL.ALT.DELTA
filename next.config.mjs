@@ -6,9 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  turbopack: {
-    // Ensure Turbopack resolves the correct repo root when multiple lockfiles exist
-    root: './'
+  // Optimize for faster compilation
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 }
 

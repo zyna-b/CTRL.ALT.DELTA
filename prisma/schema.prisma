@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  details   String?
+  source    String   @default("delta-1-chat")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("leads")
+  @@index([email])
+  @@index([createdAt])
+}
+
+model CallRequest {
+  id           String    @id @default(uuid())
+  name         String?
+  email        String
+  intent       String?
+  selectedTime DateTime? @map("selected_time")
+  status       String    @default("pending")
+  bookingLink  String?   @map("booking_link")
+  bookingId    String?   @map("booking_id")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  @@map("call_requests")
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}

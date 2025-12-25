@@ -50,3 +50,5 @@ coverage
 *.cache
 .turbo
 .env*.local
+
+/lib/generated/prisma
